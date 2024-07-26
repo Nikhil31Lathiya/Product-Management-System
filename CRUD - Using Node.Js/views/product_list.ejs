@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #c5cae9);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+      font-size: 28px;
+      text-align: center;
+    }
+
+    table {
+      width: 90%;
+      max-width: 1000px;
+      border-collapse: collapse;
+      border: 2px solid #bdbdbd;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      margin-bottom: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    table:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #8e9eab;
+      color: #ffffff;
+      font-size: 16px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #e3f2fd;
+      transition: background-color 0.3s ease;
+    }
+
+    .action-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .action-icons img {
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .action-icons img:hover {
+      transform: scale(1.2);
+      filter: brightness(0.8);
+    }
+
+    .edit-icon {
+      content: url('https://img.icons8.com/material-outlined/24/4a148c/edit--v1.png');
+    }
+
+    .delete-icon {
+      content: url('https://img.icons8.com/material-outlined/24/c62828/delete-forever.png');
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Form Submitted Successfully</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <% if (isAdminPage) { %>
+        <th>Actions</th>
+        <% } %>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.forEach(product => { %>
+      <tr data-id="<%= product.id %>">
+        <td><%= product.id %></td>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <td><%= product.qty %></td>
+        <% if (isAdminPage) { %>
+        <td class="action-icons">
+          <img class="edit-icon" alt="Edit" title="Edit">
+          <img class="delete-icon" alt="Delete" title="Delete">
+        </td>
+        <% } %>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.delete-icon').click(function() {
+        const row = $(this).closest('tr');
+        const productId = row.data('id');
+        $.ajax({
+          url: `/admin/delete-product/${productId}`,
+          type: "DELETE",
+          success: function(result) {
+            row.remove();
+          },
+          error: function(err) {
+            alert('Failed to delete the product.');
+            console.error('Error:', err);
+          }
+        });
+      });
+
+      $('.edit-icon').click(function() {
+        const row = $(this).closest('tr');
+        const productId = row.data('id');
+        window.location.href = `/admin/edit-product/${productId}`;
+      });
+    });
+  </script>
+</body>
+
+</html>

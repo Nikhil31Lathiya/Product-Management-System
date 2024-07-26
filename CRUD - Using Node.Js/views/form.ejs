@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #d1c4e9, #b39ddb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .container:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    hr {
+      border: 0;
+      height: 2px;
+      background: #7e57c2;
+      width: 60%;
+      margin: 20px auto;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .form-group input[type="text"],
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #7e57c2;
+      border: none;
+      border-radius: 5px;
+      color: #ffffff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #5c2e91;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1><%= pageTitle %></h1>
+    <hr>
+    <form method="POST" action="<%= product ? '/admin/update-product' : '/product_list' %>">
+      <% if (product) { %>
+      <input type="hidden" name="id" value="<%= product.id %>">
+      <% } %>
+      <div class="form-group">
+        <label for="nameOfTheProduct">Enter the Name of The Product:</label>
+        <input type="text" name="nameOfTheProduct" id="nameOfTheProduct" value="<%= product ? product.name : '' %>">
+      </div>
+      <div class="form-group">
+        <label for="priceOfTheProduct">Enter the Price of The Product:</label>
+        <input type="text" name="priceOfTheProduct" id="priceOfTheProduct" value="<%= product ? product.price : '' %>">
+      </div>
+      <div class="form-group">
+        <label for="qty">Enter the No of Units:</label>
+        <select name="qty" id="qty">
+          <option value="1" <%= product && product.qty == 1 ? "selected" : "" %>>1</option>
+          <option value="2" <%= product && product.qty == 2 ? "selected" : "" %>>2</option>
+          <option value="3" <%= product && product.qty == 3 ? "selected" : "" %>>3</option>
+          <option value="4" <%= product && product.qty == 4 ? "selected" : "" %>>4</option>
+          <option value="5" <%= product && product.qty == 5 ? "selected" : "" %>>5</option>
+        </select>
+      </div>
+      <button type="submit"><%= buttonAction %></button>
+    </form>
+    <% console.log("product in EJS:", product); %>
+  </div
