@@ -6,8 +6,8 @@ Product Management System is a Node.js application designed to facilitate produc
 
 - **🆕 Create**: Add new products to the database.
 - **📄 Read**: View a list of products and their details.
-- **✏️ Update**: Edit product information.
-- **🗑️ Delete**: Remove products from the list.
+- **✏️ Update**: Edit product information (Admin only).
+- **🗑️ Delete**: Remove products from the list (Admin only).
 
 ## Technologies Used
 
@@ -25,14 +25,8 @@ Product Management System is a Node.js application designed to facilitate produc
    cd product-management-system
 
 
-## Installation
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/your-username/product-management-system.git
-   cd product-management-system
-
+API Testing
+Use Postman for API testing to interact with and test the application's endpoints.
 
 ## Project Structure
 
@@ -55,4 +49,20 @@ Product Management System is a Node.js application designed to facilitate produc
 └── README.md              # Project documentation
 
 
+
+## Install dependencies:
+
+bash
+Copy code
+npm install
+Configure the database:
+
+Edit utils/database.js with your MySQL credentials. Ensure your database and product table are set up correctly.
+
+Start the application:
+
+bash
+Copy code
+npm start
+Navigate to http://localhost:3000 in your browser to use the application.
 
