@@ -52,7 +52,7 @@ exports.getEditProduct = async (req, res, next) => {
 
     const product = rows[0];
 
-    console.log("Fetched product:", product); // Add this line
+    console.log("Fetched product:", product);
 
     res.render("form", {
       pageTitle: "Edit Product",
