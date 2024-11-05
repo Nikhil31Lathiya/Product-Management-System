@@ -15,6 +15,7 @@ Product Management System is a Node.js application designed to facilitate produc
 - **Express.js**: Web framework for Node.js to handle routing and middleware.
 - **EJS**: Templating engine for rendering dynamic HTML views.
 - **MySQL**: Relational database management system for data storage.
+- **AJAX**: .
 
 ## Installation
 
